@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{% block title %}Movie Recommendation System{% endblock %}</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    {% load static %}
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+    <div class="main min-vh-100">
+        <section class="hero">
+
+            <div class="container">
+                <div class="row text-center">
+                    <div class="col-lg-12">
+                        <div> <img class="logo" src="{% static 'assets/img/logo.jpg' %}"></div>
+                        <h2 data-aos="fade-up" data-aos-delay="100" class="aos-init aos-animate">Welcome to Movie
+                            Recommendation System
+                        </h2>
+                        <p data-aos="fade-up" data-aos-delay="200" class="aos-init aos-animate">Content Based Movie
+                            Recommendation Around 5k movies</p>
+                    </div>
+                    <div class="col-lg-12">
+                        <form action="#" method="post" class="sign-up-form d-flex aos-init aos-animate"
+                            data-aos="fade-up" data-aos-delay="300">
+                            {% csrf_token %}
+                            {{form}}
+                            <input type="submit" class="btn btn-primary" value="Search"
+                                style="margin-left: 5px;width:15%" onclick="showLoading()">
+                        </form>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </section>
+        <div class="col-lg-12">
+            <div class="spinner-grow text-primary" role="status" id="loading">
+                <span class="sr-only"></span>
+            </div>
+        </div>
+        <section class="movielist" id="movielist">
+            <div class="container">
+                <div class="row text-center">
+                    <div class="col-lg-12">
+
+                        {% if movie_name and movie_name.strip %}
+                        {% if status == 0 %}
+                        <h3 data-aos="fade-up" data-aos-delay="100" class="aos-init aos-animate">Sorry, the movie <b
+                                class="movie_name">{{ movie_name }}</b> is not found in our database.</h3>
+                        {% else %}
+                        <h3 data-aos="fade-up" data-aos-delay="100" class="aos-init aos-animate">Top movies similar to
+                            <b class="movie_name">{{ movie_name }}</b>
+                        </h3>
+                        {% for movie in similar_movies %}
+                        <div class="card">
+                            <img class="card-img-top" src="{{movie.image}}" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title movie_name">{{ movie.title }}</h5>
+                                <p class="card-text"></p>
+                                <!-- <a href="#" class="btn btn-primary"></a> -->
+                            </div>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+<footer>
+    <hr class="hr text-white" />
+    <div class="col-lg-12 text-center text-white">
+        <div class="col pb-2"> This website uses TMDB and the TMDB APIs but is not endorsed, certified, or otherwise
+            approved by TMDB.</div>
+    </div>
+
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function (event) {
+            document.getElementById("loading").style.display = "none";
+            document.getElementById("movielist").style.display = "block";
+        });
+        function showLoading() {
+            document.getElementById("loading").style.display = "block";
+            document.getElementById("movielist").style.display = "none";
+        }
+
+    </script>
+</footer>
+
+</html>

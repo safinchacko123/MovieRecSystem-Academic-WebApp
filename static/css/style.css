@@ -1,0 +1,60 @@
+body{
+    background:black;
+}
+.hero {
+    --default-color: #ffffff;
+    --default-color-rgb: 255, 255, 255;
+    --background-color: #000000;
+    --background-color-rgb: 0, 0, 0;
+    width: 100%; 
+    position: relative; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.movielist {
+    --default-color: #ffffff;
+    --default-color-rgb: 255, 255, 255;
+    --background-color: #000000;
+    --background-color-rgb: 0, 0, 0;
+    width: 100%; 
+    position: relative; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+section {
+    scroll-margin-top: 90px;
+}
+section {
+    color: var(--default-color);
+    background-color: var(--background-color);
+    padding: 60px 0 0 0;
+    overflow: clip;
+}
+.hero .container,.movielist .container {
+    position: relative;
+    z-index: 3;
+}
+.card{
+    width: 19%;
+    float: left;
+    margin: 5px;
+    height: 465px;
+}
+.card-title{
+    color: #000000;
+}
+.card-img-top{
+    padding: 10px;
+}
+.movie_name{
+    text-transform: capitalize;
+}
+.logo{
+    width: 50px;;
+}
+#loading{
+    margin: 0 auto;
+    margin-top: 25px;
+}
